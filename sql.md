@@ -250,5 +250,70 @@ WHERE
 ;
 ```
 
+# DDL
+## CREATE TABLE
+
+```sql
+-- PRIMARY KEY, NOT NULL, UNIQUE
+CREATE TABLE
+    table_name
+    (
+        column1 NUMERIC(8) PRIMARY KEY
+    ,   column2 DATE NOT NULL
+    ,   column3 VARCHAR(10) UNIQUE
+    ,   column4 NUMERIC(4)
+    )
+;
+
+-- Composite PRIMARY KEY, FOREIGN KEY
+CREATE TABLE
+    table_name
+    (
+        column1 NUMERIC(8)
+    ,   column2 DATE NOT NULL
+    ,   column3 VARCHAR(10) UNIQUE
+    ,   column4 NUMERIC(4)
+    ,   PRIMARY KEY(column1, column2)
+    ,   FOREIGN KEY(column4)
+            REFERENCES other_table(columnA)
+    )
+;
+```
+
+What is the CONSTRAINT phrase???
+
+## INDEX
+
+```sql
+-- Create index
+CREATE INDEX
+    index_name
+    ON
+        table_name(column_name)
+;
+
+-- Delete index
+DROP INDEX
+    index_name
+;
+```
+
+## VIEW
+
+```sql
+-- Create view
+CREATE VIEW
+    view_name
+    AS (
+        SELECT
+            column1, column2
+        FROM
+            table_name
+        WHERE
+            column3 = 100
+    )
+;
+```
+
 # References
 [SQLスタイルガイド - Qiita](https://qiita.com/taise/items/18c14d9b01a5dfd6d35e)
