@@ -1,4 +1,5 @@
-# Format Specifiers for string.Format
+# C# Basic Grammar
+## Format Specifiers for string.Format
 [Standard numeric format strings | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings)
 | Format specifier | Name                     | Description                                                                                         |
 | :--------------: | :----------------------- | :-------------------------------------------------------------------------------------------------- |
@@ -12,7 +13,7 @@
 |    "R" or "r"    | Round-trip               | A string that can round-trip to an identical number.                                                |
 |    "X" or "x"    | Hexadecimal              | A hexadecimal string.                                                                               |
 
-# Logical AND, OR and Conditional AND, OR Operators
+## Logical AND, OR and Conditional AND, OR Operators
 [Boolean logical operators - C# reference | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators)
 
 The `&` operator evaluates both operands even if the left-hand operand evaluates to false.<br>
@@ -24,7 +25,7 @@ The conditional logical OR operator `||`, also known as the "short-circuiting" l
 If the left-hand operand of `&&` evaluates true, the right-hand operand will not evaluate.<br>
 In the same way, If the left-hand operand of `||` evaluates false, the right-hand operand will not evaluate.
 
-# Multidimensional Array
+## Multidimensional Array
 [Multidimensional Arrays - C# Programming Guide | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/multidimensional-arrays)
 ```cs
 // Create a two-dimensional array of four rows and two columns.
@@ -44,8 +45,30 @@ array5 = new int[,] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } };   // OK
 array5[2, 1] = 25;
 ```
 
-# String Comparison
+## String Comparison
 Two string operands are equal when both of them are null or both string instances are of the same length and have identical characters in each character position.
 ```cs
 "String" == "string" // false
 ```
+
+## @
+[@ - C# Reference | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/verbatim)
+
+1. The @ character prefixes a code element that the compiler is to interpret as an identifier rather than a C# keyword.
+
+```cs
+string[] for = { "John", "James", "Joan", "Jamie" };  // Error
+string[] @for = { "John", "James", "Joan", "Jamie" }; // OK
+```
+
+2. The @ character in this instance defines a verbatim string literal.
+
+```cs
+string filename1 = @"c:\documents\files\u0066.txt";
+string filename2 = "c:\\documents\\files\\u0066.txt"; // Same meaning above
+```
+
+## string
+[Strings - C# Programming Guide | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/)
+
+All of the String methods and C# operators that appear to modify a string actually return the results in a new string object.
