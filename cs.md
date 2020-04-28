@@ -7,6 +7,7 @@
   - [String Comparison](#string-comparison)
   - [@](#)
   - [string](#string)
+  - [Ref Keyword](#ref-keyword)
 - [Object Oriented Programming](#object-oriented-programming)
   - [Params keyword](#params-keyword)
   - [Class](#class)
@@ -17,9 +18,13 @@
   - [Auto-Implemented Properties](#auto-implemented-properties)
   - [Object Initializer](#object-initializer)
   - [Inheritance](#inheritance)
+  - [Overload and Override](#overload-and-override)
   - [Override](#override)
   - [This Keyword](#this-keyword)
   - [Base Keyword](#base-keyword)
+  - [Abstract and Sealed](#abstract-and-sealed)
+  - [Interfaces](#interfaces)
+  - [Polymorphism](#polymorphism)
 - [Others](#others)
   - [Attributes](#attributes)
   - [Exception](#exception)
@@ -102,6 +107,11 @@ string filename2 = "c:\\documents\\files\\u0066.txt"; // Same meaning above
 [Strings - C# Programming Guide | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/)
 
 All of the String methods and C# operators that appear to modify a string actually return the results in a new string object.
+
+## Ref Keyword
+[ref keyword - C# Reference | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/ref)
+
+When used in a method's parameter list, the ref keyword indicates that an argument is passed by reference, not by value. The ref keyword makes the formal parameter an alias for the argument, which must be a variable. In other words, any operation on the parameter is made on the argument.
 
 # Object Oriented Programming
 ## Params keyword
@@ -322,6 +332,13 @@ class Program
 }
 ```
 
+## Overload and Override
+[Method Overloading And Method Overriding In C#](https://www.c-sharpcorner.com/UploadFile/8a67c0/method-overloading-and-method-overriding-in-C-Sharp/)
+
+Overloading means creating multiple methods in a class with same names but different signatures (Parameters).
+
+Overriding means having two methods with same name and same signatures [parameters], one should be in the base class and other method should be in a derived class [child class].
+
 ## Override
 [override modifier - C# Reference | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/override)
 
@@ -431,6 +448,104 @@ SSN: 444-55-6666
 Employee ID: ABC567EFG
 */
 ```
+
+## Abstract and Sealed
+[Abstract and Sealed Classes and Class Members - C# Programming Guide | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/abstract-and-sealed-classes-and-class-members)
+
+The abstract keyword enables you to create classes and class members that are incomplete and must be implemented in a derived class.
+
+An abstract class cannot be instantiated. The purpose of an abstract class is to provide a common definition of a base class that multiple derived classes can share.
+
+Abstract classes may also define abstract methods. This is accomplished by adding the keyword abstract before the return type of the method. For example:
+
+```cs
+public abstract class A
+{
+    public abstract void DoWork(int i);
+}
+```
+
+Abstract methods have no implementation, so the method definition is followed by a semicolon instead of a normal method block. Derived classes of the abstract class must implement all abstract methods. When an abstract class inherits a virtual method from a base class, the abstract class can override the virtual method with an abstract method. For example:
+
+```cs
+// compile with: -target:library
+public class D
+{
+    public virtual void DoWork(int i)
+    {
+        // Original implementation.
+    }
+}
+
+public abstract class E : D
+{
+    public abstract override void DoWork(int i);
+}
+
+public class F : E
+{
+    public override void DoWork(int i)
+    {
+        // New implementation.
+    }
+}
+```
+
+The sealed keyword enables you to prevent the inheritance of a class or certain class members that were previously marked virtual.
+
+```cs
+public sealed class D
+{
+    // Class members here.
+}
+```
+
+A sealed class cannot be used as a base class. For this reason, it cannot also be an abstract class. Sealed classes prevent derivation. Because they can never be used as a base class, some run-time optimizations can make calling sealed class members slightly faster.
+
+A method, indexer, property, or event, on a derived class that is overriding a virtual member of the base class can declare that member as sealed. This negates the virtual aspect of the member for any further derived class. This is accomplished by putting the sealed keyword before the override keyword in the class member declaration. For example:
+
+```cs
+public class D : C
+{
+    public sealed override void DoWork() { }
+}
+```
+
+## Interfaces
+
+An interface defines a contract that can be implemented by classes and structs. An interface can contain methods, properties, events, and indexers. An interface doesn't provide implementations of the members it defines—it merely specifies the members that must be supplied by classes or structs that implement the interface.
+
+```cs
+interface IControl
+{
+    void Paint();
+}
+interface ITextBox: IControl
+{
+    void SetText(string text);
+}
+interface IListBox: IControl
+{
+    void SetItems(string[] items);
+}
+interface IComboBox: ITextBox, IListBox {}
+```
+
+## Polymorphism
+[Polymorphism - C# Programming Guide | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/polymorphism)
+
+Polymorphism is often referred to as the third pillar of object-oriented programming, after encapsulation and inheritance. Polymorphism is a Greek word that means "many-shaped" and it has two distinct aspects:
+
+ - At run time, objects of a derived class may be treated as objects of a base class in places such as method parameters and collections or arrays. When this polymorphism occurs, the object's declared type is no longer identical to its run-time type.
+- Base classes may define and implement virtual methods, and derived classes can override them, which means they provide their own definition and implementation. At run-time, when client code calls the method, the CLR looks up the run-time type of the object, and invokes that override of the virtual method. In your source code you can call a method on a base class, and cause a derived class's version of the method to be executed.
+
+When a derived class inherits from a base class, it gains all the methods, fields, properties, and events of the base class. The designer of the derived class can different choices for the behavior of virtual methods:
+
+- The derived class may override virtual members in the base class, defining new behavior.
+- The derived class inherit the closest base class method without overriding it, preserving the existing behavior but enabling further derived classes to override the method.
+- The derived class may define new non-virtual implementation of those members that hide the base class implementations.
+
+
 # Others
 ## Attributes
 [C# reserved attributes: Conditional, Obsolete, AttributeUsage | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/general)
