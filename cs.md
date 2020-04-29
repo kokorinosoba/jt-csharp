@@ -25,12 +25,17 @@
   - [Abstract and Sealed](#abstract-and-sealed)
   - [Interfaces](#interfaces)
   - [Polymorphism](#polymorphism)
+  - [Type-testing Operators](#type-testing-operators)
+    - [is Operator](#is-operator)
+    - [as Operator](#as-operator)
 - [Others](#others)
   - [Attributes](#attributes)
   - [Exception](#exception)
   - [Exception Handling](#exception-handling)
   - [Using Statement](#using-statement)
   - [Checked and Unchecked](#checked-and-unchecked)
+  - [Enumeration Type](#enumeration-type)
+  - [Delegate](#delegate)
 - [Reference](#reference)
 
 # C# Basic Grammar
@@ -545,6 +550,30 @@ When a derived class inherits from a base class, it gains all the methods, field
 - The derived class inherit the closest base class method without overriding it, preserving the existing behavior but enabling further derived classes to override the method.
 - The derived class may define new non-virtual implementation of those members that hide the base class implementations.
 
+## Type-testing Operators
+[Type-testing operators and cast expression - C# reference | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast)
+### is Operator
+The is operator checks if the runtime type of an expression result is compatible with a given type. Beginning with C# 7.0, the is operator also tests an expression result against a pattern.
+
+```cs
+E is T
+```
+where E is an expression that returns a value and T is the name of a type or a type parameter. E cannot be an anonymous method or a lambda expression.
+
+The E is T expression returns true if the result of E is non-null and can be converted to type T by a reference conversion, a boxing conversion, or an unboxing conversion; otherwise, it returns false. The is operator doesn't consider user-defined conversions.
+
+### as Operator
+The as operator explicitly converts the result of an expression to a given reference or nullable value type. If the conversion is not possible, the as operator returns null. Unlike a cast expression, the as operator never throws an exception.
+
+```cs
+E as T
+```
+
+where E is an expression that returns a value and T is the name of a type or a type parameter, produces the same result as
+
+```cs
+E is T ? (T)(E) : (T)null
+```
 
 # Others
 ## Attributes
@@ -659,6 +688,71 @@ checked
 {
     int i3 = 2147483647 + ten;
     Console.WriteLine(i3);
+}
+```
+
+## Enumeration Type
+An enumeration type (or enum type) is a value type defined by a set of named constants of the underlying integral numeric type. To define an enumeration type, use the enum keyword and specify the names of enum members:
+
+```cs
+enum Season
+{
+    Spring,
+    Summer,
+    Autumn,
+    Winter
+}
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine((int)Season.Autumn);
+    }
+}
+```
+
+## Delegate
+[C# Delegates - A tour of the C# language | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/delegates)
+
+A delegate type represents references to methods with a particular parameter list and return type. Delegates make it possible to treat methods as entities that can be assigned to variables and passed as parameters. Delegates are similar to the concept of function pointers found in some other languages. Unlike function pointers, delegates are object-oriented and type-safe.
+
+```cs
+using System;
+delegate double Function(double x);
+class Multiplier
+{
+    double factor;
+    public Multiplier(double factor)
+    {
+        this.factor = factor;
+    }
+    public double Multiply(double x)
+    {
+        return x * factor;
+    }
+}
+
+class DelegateExample
+{
+    static double Square(double x)
+    {
+        return x * x;
+    }
+    static double[] Apply(double[] a, Function f)
+    {
+        double[] result = new double[a.Length];
+        for (int i = 0; i < a.Length; i++) result[i] = f(a[i]);
+        return result;
+    }
+    static void Main()
+    {
+        double[] a = {0.0, 0.5, 1.0};
+        double[] squares = Apply(a, Square);
+        double[] sines = Apply(a, Math.Sin);
+        Multiplier m = new Multiplier(2.0);
+        double[] doubles =  Apply(a, m.Multiply);
+    }
 }
 ```
 
