@@ -31,6 +31,7 @@
 - [Others](#others)
   - [Attributes](#attributes)
   - [Exception](#exception)
+  - [Exception Class Properties](#exception-class-properties)
   - [Exception Handling](#exception-handling)
   - [Using Statement](#using-statement)
   - [Checked and Unchecked](#checked-and-unchecked)
@@ -633,6 +634,20 @@ private static void TestThrow()
     throw ex;
 }
 ```
+
+## Exception Class Properties
+[Exception Class (System) | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/api/system.exception?view=netcore-3.1#properties)
+
+| Property Name  | Description                                                                                                |
+| -------------- | ---------------------------------------------------------------------------------------------------------- |
+| Data           | Gets a collection of key/value pairs that provide additional user-defined information about the exception. |
+| HelpLink       | Gets or sets a link to the help file associated with this exception.                                       |
+| HResult        | Gets or sets HRESULT, a coded numerical value that is assigned to a specific exception.                    |
+| InnerException | Gets the Exception instance that caused the current exception.                                             |
+| Message        | Gets a message that describes the current exception.                                                       |
+| Source         | Gets or sets the name of the application or the object that causes the error.                              |
+| StackTrace     | Gets a string representation of the immediate frames on the call stack.                                    |
+| TargetSite     | Gets the method that throws the current exception.                                                         |
 
 ## Exception Handling
 [Exception Handling - C# Programming Guide | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/exceptions/exception-handling)
