@@ -37,6 +37,7 @@
   - [Checked and Unchecked](#checked-and-unchecked)
   - [Enumeration Type](#enumeration-type)
   - [Delegate](#delegate)
+  - [Lambda Expression](#lambda-expression)
 - [Reference](#reference)
 
 # C# Basic Grammar
@@ -769,6 +770,23 @@ class DelegateExample
         double[] doubles =  Apply(a, m.Multiply);
     }
 }
+```
+
+## Lambda Expression
+[Anonymous functions - C# Programming Guide | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/anonymous-functions)
+
+You can use a lambda expression or an anonymous method to create an anonymous function. We recommend using lambda expressions as they provide more concise and expressive way to write inline code. Unlike anonymous methods, some types of lambda expressions can be converted to the expression tree types.
+
+- Expression lambda that has an expression as its body:
+
+```cs
+(input-parameters) => expression
+```
+
+- Statement lambda that has a statement block as its body:
+
+```cs
+(input-parameters) => { <sequence-of-statements> }
 ```
 
 # Reference
