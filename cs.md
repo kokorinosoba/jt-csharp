@@ -38,6 +38,10 @@
   - [Enumeration Type](#enumeration-type)
   - [Delegate](#delegate)
   - [Lambda Expression](#lambda-expression)
+  - [Boxing and Unboxing](#boxing-and-unboxing)
+- [Tips](#tips)
+  - [Get Properties/Members List](#get-propertiesmembers-list)
+  - [Difference between Dictionary Add Method and Indexer](#difference-between-dictionary-add-method-and-indexer)
 - [Reference](#reference)
 
 # C# Basic Grammar
@@ -788,6 +792,34 @@ You can use a lambda expression or an anonymous method to create an anonymous fu
 ```cs
 (input-parameters) => { <sequence-of-statements> }
 ```
+
+## Boxing and Unboxing
+[Boxing and Unboxing - C# Programming Guide | Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/boxing-and-unboxing)
+
+Boxing is the process of converting a value type to the type object or to any interface type implemented by this value type. When the common language runtime (CLR) boxes a value type, it wraps the value inside a System.Object instance and stores it on the managed heap. Unboxing extracts the value type from the object. Boxing is implicit; unboxing is explicit. The concept of boxing and unboxing underlies the C# unified view of the type system in which a value of any type can be treated as an object.
+
+```cs
+int i = 123;
+object o = i;  //boxing
+i = (int)o;  // unboxing
+```
+
+In relation to simple assignments, boxing and unboxing are computationally expensive processes. When a value type is boxed, a new object must be allocated and constructed. To a lesser degree, the cast required for unboxing is also expensive computationally. For more information, see Performance.
+
+# Tips
+## Get Properties/Members List
+
+```cs
+new StringBuilder().GetType().GetProperties().ToList().ForEach(Console.WriteLine);
+new StringBuilder().GetType().GetMembers().ToList().ForEach(Console.WriteLine);
+```
+
+## Difference between Dictionary Add Method and Indexer
+[c# - Difference of Dictionary.Add vs Dictionary[key]=value - Stack Overflow](https://stackoverflow.com/questions/11557418/difference-of-dictionary-add-vs-dictionarykey-value)
+
+Add -> Adds an item to the dictionary if item already exists in the dictionary an exception will be thrown.
+
+Indexer or Dictionary[Key] => Add Or Update. If the key doesn't exist in the dictionary, a new item will be added. If the key exists then the value will be updated with the new value.
 
 # Reference
 1. [【C#】デバッグの手順とは？デバッガ・Debugクラスの使い方を徹底解説 | 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト](https://www.sejuku.net/blog/100949)
