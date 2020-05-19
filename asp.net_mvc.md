@@ -1,3 +1,51 @@
+# Index
+- [Index](#index)
+- [About <span>ASP.NET</span> MVC](#about-aspnet-mvc)
+  - [ASP(Active Server Pages)](#aspactive-server-pages)
+  - [<span>ASP.NET</span>](#aspnet)
+  - [ASP.NET MVC](#aspnet-mvc)
+    - [Controller](#controller)
+    - [View](#view)
+    - [Model](#model)
+  - [Cookies and Sessions](#cookies-and-sessions)
+- [Views](#views)
+  - [Razor](#razor)
+  - [Razor Syntax](#razor-syntax)
+  - [Implicit Razor Expressions](#implicit-razor-expressions)
+  - [Explicit Razor Expressions](#explicit-razor-expressions)
+  - [Expression Encoding](#expression-encoding)
+  - [Razor Code Blocks](#razor-code-blocks)
+  - [Implicit Transitions](#implicit-transitions)
+  - [Explicit Delimited Transition](#explicit-delimited-transition)
+  - [Explicit Line Transition](#explicit-line-transition)
+  - [Control Structures](#control-structures)
+    - [Conditionals @if, else if, else, and @switch](#conditionals-if-else-if-else-and-switch)
+    - [Looping @for, @foreach, @while, and @do while](#looping-for-foreach-while-and-do-while)
+      - [`@for`](#for)
+      - [`@foreach`](#foreach)
+      - [`@while`](#while)
+      - [`@do while`](#do-while)
+    - [Compound @using](#compound-using)
+    - [@try, catch, finally](#try-catch-finally)
+    - [Comments](#comments)
+  - [Directives](#directives)
+    - [@attribute](#attribute)
+    - [@code](#code)
+    - [@functions](#functions)
+  - [Helper Methods](#helper-methods)
+    - [ActionLink](#actionlink)
+    - [DisplayFor](#displayfor)
+    - [DisplayNameFor](#displaynamefor)
+    - [LabelFor](#labelfor)
+    - [TextBoxFor](#textboxfor)
+    - [HiddenFor](#hiddenfor)
+    - [PasswordFor](#passwordfor)
+    - [RadioButtonFor](#radiobuttonfor)
+    - [CheckBoxFor](#checkboxfor)
+    - [DropDownListFor](#dropdownlistfor)
+    - [BeginForm](#beginform)
+    - [model](#model-1)
+
 # About <span>ASP.NET</span> MVC
 ## ASP(Active Server Pages)
 [Active Server Pages - Wikipedia](https://en.wikipedia.org/wiki/Active_Server_Pages)
@@ -458,4 +506,81 @@ The code generates the following HTML markup:
         <p>Name: <strong>@name</strong></p>
     }
 }
+```
+
+## Helper Methods
+### ActionLink
+```html
+@Html.ActionLink("LinkText", "ActionName", ["ControllerName"], ["RootController"])
+```
+
+### DisplayFor
+Display content of property
+```html
+@Html.DisplayFor(model => Property)
+```
+
+### DisplayNameFor
+```html
+@Html.DisplayNameFor(model => Property)
+```
+
+### LabelFor
+```html
+@Html.LabelFor(model => Property)
+```
+
+### TextBoxFor
+```html
+@Html.TextBoxFor(model => Property)
+```
+
+### HiddenFor
+```html
+@Html.HiddenFor(model => Property)
+```
+
+### PasswordFor
+```html
+@Html.PasswordFor(model => Property)
+```
+
+### RadioButtonFor
+```html
+@Html.RadioButtonFor(model => Property, Value)
+```
+
+### CheckBoxFor
+```html
+@Html.CheckBoxFor(model => Property)
+```
+
+### DropDownListFor
+```html
+@Html.DropDownListFor(model => Property, SelectList)
+
+@{
+    var selectItems = new SelectListItem[] {
+        new SelectListItem { Value = "1", Text = "Men" },
+        new SelectListItem { Value = "2", Text = "Woen" },
+    }
+}
+
+@Html.DropDownListFor(model => Property, new SelectList(selectItems, "Value", "Text", Property))
+```
+
+### BeginForm
+```html
+@using(@Html.BeginForm("ActionName", "ControllerName", [Parameter], [FormMethod.Post]) {
+    <!-- Content -->
+    <!-- Content -->
+    <!-- Content -->
+
+    <input type="submit">
+}
+```
+
+### model
+```html
+@model ModelClassName
 ```
